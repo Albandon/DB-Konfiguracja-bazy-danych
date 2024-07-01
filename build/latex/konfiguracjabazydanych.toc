@@ -1,0 +1,13 @@
+\babel@toc {nil}{}\relax 
+\contentsline {chapter}{\numberline {1}Lokalizacja i struktura katalogów}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lokalizacja:}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Struktura katalogów:}{1}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Tabele \sphinxhyphen {} rozmiar, planowanie i monitorowanie}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Rozmiar}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Planowanie}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Monitorowanie}{4}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Podstawowe parametry konfiguracyjne}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Plik postgresql.conf}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Plik pg\_hba.conf}{6}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Plik pg\_ident.conf}{6}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Indices and tables}{7}{chapter.4}%

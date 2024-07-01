@@ -1,0 +1,16 @@
+.. role:: sql(code)
+	:language: sql
+
+Tabele
+------
+Częścią planowania tabel jest:
+
+1) **Normalizacja** - Rozbijanie tabel na mniejsze by zmninimalizować powtarzanie danych i zależności.
+
+2) **Denormalizacja** - Łączenie tabel w większe i wprowadzanie redundancji w celu przyśpieszenia czasu zapytań.
+
+3) **Indeksowanie** - tworzenie indeksów w celu przyspieszenia przeszukiwań tabeli.
+
+:sql:`CREATE INDEX idx_nazwa_kolumny ON nazwa_tabeli(nazwa_kolumny);`
+
+
