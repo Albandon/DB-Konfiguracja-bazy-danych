@@ -7,14 +7,10 @@ Witaj w sprawozdaniu o konfiguracja bazy danych
 ====================================================
 
 .. toctree::
-   	:maxdepth: 2
+	:maxdepth: 2
    	:caption: Contents:
 
-	rozdzialy/rozdzial1
-	rozdzialy/rozdzial2
-	rozdzialy/rozdzial3
-
-
+	Konfiguracja-bazy-danych
 
 Indices and tables
 ==================

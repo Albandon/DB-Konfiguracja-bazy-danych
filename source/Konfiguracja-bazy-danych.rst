@@ -1,3 +1,39 @@
+Konfiguracja bazy danych
+========================
+
+Lokalizacja i struktura katalogów
+---------------------------------
+
+Lokalizacja:
+~~~~~~~~~~~~
+
+1) Katalog danych:
+    - ``/var/lib/postgresql/<wersja>/main`` na na systemach Debian/Ubuntu
+    - ``/var/lib/pgsql/<wersja>/data`` na systemach Red Hat/CentOS.
+    - Zawiera wszystkie dane, pliki konfiguracyjne, logi i pliki kontrolne.
+
+2) Katalog Konfiguracyjny:
+    - Pliki konfiguracyjne zwykle znajdują się w katalogu danych, choć zdarza się, że mogą znajdować się w innym katalogu np ``/etc/postgresql/<wersja>/main``
+
+3) Katalog logów:
+    - Domyślnie ``/var/log/postgresql`` na Debianie/Ubuntu oraz ``/var/lib/pgsql/<wersja>/data/pg_log`` na Red Har/CentOS
+    - zawiera logi PostgreSQL
+
+Struktura katalogów:
+~~~~~~~~~~~~~~~~~~~~
+- ``base/``: Zawiera dane użytkownika dla każdej bazy danych.
+- ``global/``: Przechowuje dane globalne, np. tabele systemowe.
+- ``pg_xlog/`` lub pg_wal/ (od wersji 10): Zawiera dzienniki Write-Ahead Log (WAL).
+- ``pg_clog/`` lub pg_xact/: Przechowuje dane dotyczące transakcji.
+- ``pg_tblspc/``: Linki symboliczne do tabel przestrzeni.
+- ``pg_multixact/``: Dane dotyczące wielokrotnych transakcji.
+- ``pg_subtrans/``: Dane dotyczące podrzędnych transakcji.
+- ``pg_stat/``: Dane statystyczne.
+- ``pg_snapshots/``: Przechowuje dane dotyczące snapshotów.
+
+
+
+
 .. role:: sql(code)
 	:language: sql
 
@@ -101,3 +137,77 @@ Dodatkowo możlive jest monitorowanie wydajności tabel za pomocą:
 
 	SELECT pid, usename, datname, state, query_start, query
 	FROM pg_stat_activity;
+
+
+
+
+Podstawowe parametry konfiguracyjne
+-----------------------------------
+
+Plik postgresql.conf
+~~~~~~~~~~~~~~~~~~~~
+
+Plik *postgresql.conf* zawiera ustawienia dotyczące wydajności, logowania, sieci i wielu innych aspektów.
+
+**Kluczowe ustawienia:**
+
+1) **Słuchanie połączeń:**
+
+::
+
+	listen_addresses = 'localhost'  # Adresy IP, na których PostgreSQL będzie nasłuchiwać połączeń
+	port = 5432                     # Port, na którym PostgreSQL będzie nasłuchiwać połączeń 
+
+
+2) **Pamięć i wydajność:**
+
+::
+
+	shared_buffers = 128MB           # Ilość pamięci RAM przeznaczona na buforowanie danych
+	work_mem = 4MB                   # Ilość pamięci RAM na operacje sortowania i agregacji na użytkownika
+	maintenance_work_mem = 64MB      # Ilość pamięci RAM na operacje utrzymaniowe (np. VACUUM, CREATE INDEX)
+
+3) **Autovacuum:**
+
+::
+
+	autovacuum = on                  # Automatyczne czyszczenie i analiza tabel
+	autovacuum_naptime = 1min        # Częstotliwość uruchamiania procesu autovacuum
+
+
+---------------------------------------------
+
+Plik pg_hba.conf
+~~~~~~~~~~~~~~~~
+
+Plik **pg_hba.conf** odpowiada za kontrolę dostępu do bazy danych PostgreSQL.
+
+**Przykład konfiguracji:**
+::
+	
+	# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+	# Zezwól lokalnym użytkownikom na połączenie
+	local   all             all                                     md5
+
+	# Zezwól zdalnym użytkownikom z sieci 192.168.1.0/24 na połączenie
+	host    all             all             192.168.1.0/24          md5
+
+Plik pg_ident.conf
+~~~~~~~~~~~~~~~~~~
+
+Plik **pg_ident.conf** pozwala mapować systemowych użytkowników do użytkowników PostgreSQL.
+
+**Przykład konfiguracji:**
+
+::
+
+	# MAPNAME       SYSTEM-USERNAME         PG-USERNAME
+
+	mymap           johndoe                 john
+	mymap           janedoe                 jane
+
+W pliku **pg_hba.conf** można użyć tej mapy:
+::
+
+	host    all             all             127.0.0.1/32            ident map=mymap

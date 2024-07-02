@@ -13,11 +13,17 @@ author = 'Hubert Albanowsski, Filip Opac'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = [
+    'sphinx.ext.doctest',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.viewcode'
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
 
+show_authors = 1 
 language = 'pl'
 
 # -- Options for HTML output -------------------------------------------------
@@ -25,3 +31,4 @@ language = 'pl'
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+
