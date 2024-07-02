@@ -1,8 +1,13 @@
 Konfiguracja bazy danych
 ========================
 
+:Author: 	- Hubert Albanowski
+			- Filip Opac
+
+
 Lokalizacja i struktura katalogów
 ---------------------------------
+
 
 Lokalizacja:
 ~~~~~~~~~~~~
